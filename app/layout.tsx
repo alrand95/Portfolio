@@ -25,12 +25,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const { data: settings } = await supabase.from('site_settings').select('theme_config').single();
-  const themeConfig = settings?.theme_config || undefined;
+  let themeConfig = undefined;
 
-  // Track visit server-side
-  await recordVisit();
+  try {
+    const supabase = await createClient();
+    const { data: settings } = await supabase.from('site_settings').select('theme_config').single();
+    themeConfig = settings?.theme_config || undefined;
+
+    // Track visit server-side
+    await recordVisit();
+  } catch (error) {
+    console.error("RootLayout Error (Non-Critical):", error);
+    // Proceed with default theme and no visit tracking
+  }
 
   return (
     <html className={cn(inter.variable, baloo.variable, cairo.variable)} suppressHydrationWarning>
