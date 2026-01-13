@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg: #000000;
+  --color-neon-pink: #FF4DA6;
+  --color-neon-purple: #9B5CFF;
+  --color-neon-blue: #4BD0FF;
+  --color-glass-panel: rgba(20, 20, 20, var(--glass-opacity));
+
+  --radius-bunny: 50px;
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ededed;
+  --glass-opacity: 0.6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-cairo), Arial, Helvetica, sans-serif;
+}
+
+/* 
+  User requested layout to NOT flip. 
+  Keeping direction LTR even for Arabic.
+*/
+/* html[dir="rtl"] {
+  direction: rtl;
+} */
+
+/* Custom Utilities */
+@utility text-glow {
+  text-shadow: 0 0 10px var(--color-neon-pink), 0 0 20px var(--color-neon-purple);
+}
+
+@utility box-glow {
+  box-shadow: 0 0 15px var(--color-neon-purple), inset 0 0 15px rgba(155, 92, 255, 0.2);
+}
+
+@utility glass {
+  background: var(--color-glass-panel);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
