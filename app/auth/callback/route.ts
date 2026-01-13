@@ -8,10 +8,15 @@ export async function GET(request: Request) {
     const next = searchParams.get('next') ?? '/admin';
 
     if (code) {
-        const supabase = await createClient();
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (!error) {
-            return NextResponse.redirect(`${origin}${next}`);
+        try {
+            const supabase = await createClient();
+            const { error } = await supabase.auth.exchangeCodeForSession(code);
+            if (!error) {
+                return NextResponse.redirect(`${origin}${next}`);
+            }
+        } catch (err) {
+            console.error("Auth Callback Error:", err);
+            // Fall through to error redirect
         }
     }
 

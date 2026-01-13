@@ -8,39 +8,48 @@ export async function middleware(request: NextRequest) {
         },
     })
 
-    // Skip if Supabase keys are not configured to avoid dev crashes
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        return response
-    }
+    let user = null;
 
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-        {
-            cookies: {
-                getAll() {
-                    return request.cookies.getAll()
-                },
-                setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({ name, value }) =>
-                        request.cookies.set(name, value)
-                    )
-                    response = NextResponse.next({
-                        request: {
-                            headers: request.headers,
-                        },
-                    })
-                    cookiesToSet.forEach(({ name, value, options }) =>
-                        response.cookies.set(name, value, options as any)
-                    )
-                },
-            },
+    try {
+        // Skip if Supabase keys are not configured to avoid dev crashes
+        if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+            console.warn("Middleware: Supabase keys missing, skipping user check.");
+            return response
         }
-    )
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+        const supabase = createServerClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+            {
+                cookies: {
+                    getAll() {
+                        return request.cookies.getAll()
+                    },
+                    setAll(cookiesToSet) {
+                        cookiesToSet.forEach(({ name, value }) =>
+                            request.cookies.set(name, value)
+                        )
+                        response = NextResponse.next({
+                            request: {
+                                headers: request.headers,
+                            },
+                        })
+                        cookiesToSet.forEach(({ name, value, options }) =>
+                            response.cookies.set(name, value, options as any)
+                        )
+                    },
+                },
+            }
+        )
+
+        const { data } = await supabase.auth.getUser()
+        user = data.user;
+
+    } catch (e) {
+        console.error("Middleware Supabase Error:", e);
+        // On error, treat as not logged in and allow request to proceed (or standard handling)
+        return response;
+    }
 
     // Admin Route Protection with Email Whitelist
     if (request.nextUrl.pathname.startsWith('/admin')) {
