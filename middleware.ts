@@ -66,10 +66,15 @@ export async function middleware(request: NextRequest) {
         }
 
         // Log access attempt for debugging
-        console.log(`[Middleware] Admin Access Attempt: ${user.email} (Authorized: ${adminEmails.includes(user.email?.toLowerCase() || '')})`);
+        console.log(`[Middleware] Admin Check: User='${user.email}'`);
+        console.log(`[Middleware] Raw Env='${process.env.ADMIN_EMAILS}'`);
+        console.log(`[Middleware] Parsed Allowed List=${JSON.stringify(adminEmails)}`);
+
+        const isAuthorized = user.email && adminEmails.includes(user.email.toLowerCase());
+        console.log(`[Middleware] Authorized=${isAuthorized}`);
 
         // Check if user email is in admin list
-        if (!user.email || !adminEmails.includes(user.email.toLowerCase())) {
+        if (!isAuthorized) {
             // Return 404 to hide the existence of admin routes
             return NextResponse.redirect(new URL('/404', request.url));
         }
