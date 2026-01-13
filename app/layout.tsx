@@ -16,7 +16,7 @@ const baloo = Baloo_2({ subsets: ['latin'], weight: ['400', '700', '800'], varia
 const cairo = Cairo({ subsets: ['arabic'], weight: ['400', '700', '900'], variable: '--font-cairo' });
 
 export const metadata: Metadata = {
-  title: 'Rand Design | Cyber-Kawaii Portfolio',
+  title: 'Rand Portfolio',
   description: 'I Code Fast. I Break Things. I Hop Back Up.',
 };
 

@@ -23,7 +23,7 @@ export const translations: Record<Language, Record<string, string>> = {
         // Hero
         'hero.greeting': 'Welcome to',
         'hero.title_prefix': 'Rand',
-        'hero.title_highlight': 'Design',
+        'hero.title_highlight': 'Portfolio',
         'hero.subtitle': 'Cyber-Kawaii Portfolio',
         'hero.description': 'I code fast. I break things. I hop back up. A digital playground of neon dreams and code.',
         'hero.cta_primary': 'Explore My World',
@@ -59,7 +59,7 @@ export const translations: Record<Language, Record<string, string>> = {
     ar: {
         // Hero
         'hero.greeting': 'مرحباً بك في',
-        'hero.title_prefix': 'تصميم',
+        'hero.title_prefix': 'محفظة',
         'hero.title_highlight': 'رند',
         'hero.subtitle': 'محفظة سايبر-كاواي',
         'hero.description': 'أبرمج بسرعة. أكسر الأشياء. وأعود للقفز من جديد. ملعب رقمي من أحلام النيون والكود.',

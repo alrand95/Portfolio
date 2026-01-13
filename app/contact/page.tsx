@@ -365,12 +365,11 @@ export default function ContactPage() {
                     <div className="space-y-6">
                         {/* Cutie Avatar with Ears */}
                         <motion.div
-                            className="relative w-32 h-32 mb-8 cursor-pointer group"
+                            className="relative w-32 h-32 mb-8 group"
                             onMouseEnter={() => setIsAvatarHovered(true)}
                             onMouseLeave={() => setIsAvatarHovered(false)}
                             onTouchStart={() => setIsAvatarHovered(!isAvatarHovered)}
                             whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                         >
                             <AnimatePresence>
                                 {isAvatarHovered && (
