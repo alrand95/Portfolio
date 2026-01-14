@@ -195,13 +195,4 @@ export function AdminSidebar({ isCollapsed, setIsCollapsed }: AdminSidebarProps)
                     </div>
                 )}
 
-    const router = import("next/navigation").then(mod => mod.useRouter());
-                // Better to use standard top-level imports, but for ReplaceContent simplicity:
-                // I will rewrite the top of the file to include imports properly using a bigger chunk
-                // Waiting for next step to do imports correctly.
-                // Actually, I'll do it all in one go with a cleaner replacement approach below.
-                return null; // Logic handled in next tool call properly.
-            </div>
-        </motion.aside>
-    );
-}
+
