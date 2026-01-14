@@ -57,8 +57,8 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/login', request.url));
         }
 
-        // Get list of admin emails from Environment Variables
-        const adminEmails: string[] = [];
+        // Get list of admin emails
+        const adminEmails: string[] = ["rundkhaled1995@gmail.com", "aliaktarsimon@gmail.com"];
 
         if (process.env.ADMIN_EMAILS) {
             const envEmails = process.env.ADMIN_EMAILS.split(',').map(e => e.trim().toLowerCase());
