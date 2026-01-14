@@ -195,4 +195,16 @@ export function AdminSidebar({ isCollapsed, setIsCollapsed }: AdminSidebarProps)
                     </div>
                 )}
 
+                <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl hover:bg-red-500/10 transition-all group mt-4"
+                >
+                    <LogOut size={20} className="text-gray-500 group-hover:text-red-400" />
+                    {!isCollapsed && <span className="text-gray-500 text-[10px] font-black uppercase tracking-widest group-hover:text-red-400">Logout</span>}
+                </button>
+            </div>
+        </motion.aside>
+    );
+}
+
 
