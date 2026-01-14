@@ -18,7 +18,7 @@ const cairo = Cairo({ subsets: ['arabic'], weight: ['400', '700', '900'], variab
 export const metadata: Metadata = {
   title: 'Rand Albakhet | Creative Graphic Designer & Visual Artist',
   description: 'Portfolio of Rand Albakhet, a highly creative Graphic Designer with 6+ years of experience in Branding, Logo Design, and Digital Marketing. Based in Jordan, working globally.',
-  keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer', 'Digital Marketing', 'Video Editing'],
+  keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS', 'Best Portfolio Website', 'Best Graphic Design Portfolio', 'Best Website Design 2026', 'Best Custom Design', 'Top Rated Graphic Designer', 'Creative Portfolio Design', '3D Web Design', 'Interactive Portfolio', 'Award Winning Design', 'Best UX/UI Design', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer'],
   openGraph: {
     title: 'Rand Albakhet | Creative Graphic Designer',
     description: 'Expert in Branding, Logo Design, and Visual Identity. 6+ years of global experience.',
