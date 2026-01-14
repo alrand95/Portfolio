@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Baloo_2, Inter, Cairo } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -78,6 +79,7 @@ export default async function RootLayout({
             <PublicBirthdayCelebration />
             <EventPopup />
             {children}
+            <SpeedInsights />
             <BunnyNav />
             <LanguageSelectionModal />
           </ThemeProvider>
