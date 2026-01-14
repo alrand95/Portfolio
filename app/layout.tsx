@@ -18,7 +18,7 @@ const cairo = Cairo({ subsets: ['arabic'], weight: ['400', '700', '900'], variab
 export const metadata: Metadata = {
   title: 'Rand Albakhet | Creative Graphic Designer & Visual Artist',
   description: 'Portfolio of Rand Albakhet, a highly creative Graphic Designer with 6+ years of experience in Branding, Logo Design, and Digital Marketing. Based in Jordan, working globally.',
-  keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer', 'Digital Marketing', 'Video Editing'],
+  keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer', 'Digital Marketing', 'Video Editing'],
   openGraph: {
     title: 'Rand Albakhet | Creative Graphic Designer',
     description: 'Expert in Branding, Logo Design, and Visual Identity. 6+ years of global experience.',
@@ -32,7 +32,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Rand Albakhet',
-  alternateName: ['Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid'],
+  alternateName: ['Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS'],
   jobTitle: 'Graphic Designer',
   url: 'https://alrand-portfolio.vercel.app',
   description: 'Highly creative and knowledgeable Graphic Designer with a strong background in developing and executing visual design.',
