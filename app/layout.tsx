@@ -16,8 +16,35 @@ const baloo = Baloo_2({ subsets: ['latin'], weight: ['400', '700', '800'], varia
 const cairo = Cairo({ subsets: ['arabic'], weight: ['400', '700', '900'], variable: '--font-cairo' });
 
 export const metadata: Metadata = {
-  title: 'Rand Portfolio',
-  description: 'I Code Fast. I Break Things. I Hop Back Up.',
+  title: 'Rand Albakhet | Creative Graphic Designer & Visual Artist',
+  description: 'Portfolio of Rand Albakhet, a highly creative Graphic Designer with 6+ years of experience in Branding, Logo Design, and Digital Marketing. Based in Jordan, working globally.',
+  keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer', 'Digital Marketing', 'Video Editing'],
+  openGraph: {
+    title: 'Rand Albakhet | Creative Graphic Designer',
+    description: 'Expert in Branding, Logo Design, and Visual Identity. 6+ years of global experience.',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://alrand-portfolio.vercel.app',
+  },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rand Albakhet',
+  alternateName: 'Rand Khalid',
+  jobTitle: 'Graphic Designer',
+  url: 'https://alrand-portfolio.vercel.app',
+  description: 'Highly creative and knowledgeable Graphic Designer with a strong background in developing and executing visual design.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Al Zarqa',
+    addressCountry: 'Jordan'
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Freelance'
+  }
 };
 
 export default async function RootLayout({
@@ -42,6 +69,10 @@ export default async function RootLayout({
   return (
     <html className={cn(inter.variable, baloo.variable, cairo.variable)} suppressHydrationWarning>
       <body className="font-sans antialiased bg-primary-bg text-foreground min-h-screen selection:bg-neon-pink selection:text-white overflow-x-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <LanguageProvider>
           <ThemeProvider initialTheme={themeConfig}>
             <PublicBirthdayCelebration />
