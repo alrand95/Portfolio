@@ -16,9 +16,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 export const adminNavItems = [
     { name: "Dashboard", url: "/admin", icon: LayoutDashboard, color: "pink" },
@@ -37,7 +38,15 @@ interface AdminSidebarProps {
 
 export function AdminSidebar({ isCollapsed, setIsCollapsed }: AdminSidebarProps) {
     const pathname = usePathname();
+    const router = useRouter();
     const [hoveredTab, setHoveredTab] = useState<string | null>(null);
+
+    const handleLogout = async () => {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        router.push("/login");
+        router.refresh();
+    };
 
     return (
         <motion.aside
@@ -186,10 +195,12 @@ export function AdminSidebar({ isCollapsed, setIsCollapsed }: AdminSidebarProps)
                     </div>
                 )}
 
-                <button className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl hover:bg-red-500/10 transition-all group mt-4">
-                    <LogOut size={20} className="text-gray-500 group-hover:text-red-400" />
-                    {!isCollapsed && <span className="text-gray-500 text-[10px] font-black uppercase tracking-widest group-hover:text-red-400">Logout</span>}
-                </button>
+    const router = import("next/navigation").then(mod => mod.useRouter());
+                // Better to use standard top-level imports, but for ReplaceContent simplicity:
+                // I will rewrite the top of the file to include imports properly using a bigger chunk
+                // Waiting for next step to do imports correctly.
+                // Actually, I'll do it all in one go with a cleaner replacement approach below.
+                return null; // Logic handled in next tool call properly.
             </div>
         </motion.aside>
     );
