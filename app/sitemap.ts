@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
 
+export const revalidate = 86400; // Revalidate sitemap at most once per day to update dynamic blog posts
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.alrund.space';
 
@@ -28,6 +30,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: route === '' ? 1.0 : 0.8,
         });
     }
+
+    // Add vintage CV route (English only)
+    sitemapEntries.push({
+        url: `${baseUrl}/vintage-cv`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+    });
 
     try {
         const { createClient: createSupabaseClient } = await import('@supabase/supabase-js');
