@@ -35,15 +35,13 @@ export const ParallaxCard = ({ children, className }: ParallaxCardProps) => {
 
             <motion.div
                 className={cn(
-                    'relative p-8 rounded-bunny bg-black border border-neon-purple/50 shadow-[0_0_15px_rgba(155,92,255,0.3)] overflow-hidden z-20 will-change-transform',
+                    'relative p-8 rounded-bunny bg-black border border-neon-purple/50 shadow-[0_0_15px_rgba(155,92,255,0.3)] overflow-hidden z-20 will-change-transform transition-[border-color,box-shadow] duration-300 ease-out hover:border-neon-pink hover:shadow-[0_10px_40px_-10px_var(--color-neon-purple)]',
                     className
                 )}
                 initial={{ y: 0 }}
                 whileHover={{
                     y: -12,
                     scale: 1.02,
-                    boxShadow: '0 10px 40px -10px var(--color-neon-purple)',
-                    borderColor: 'var(--color-neon-pink)',
                 }}
                 transition={{
                     type: 'spring',
