@@ -10,6 +10,7 @@
   --radius-bunny: 50px;
 
   --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s infinite linear;
 
   @keyframes float {
 
@@ -20,6 +21,15 @@
 
     50% {
       transform: translateY(-20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
     }
   }
 }
@@ -62,4 +72,15 @@ html[lang="ar"] body {
   background: var(--color-glass-panel);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility shimmer-bg {
+  background: linear-gradient(90deg, #0f0f11 25%, #1f1f23 50%, #0f0f11 75%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility cute-float {
+  animation: float var(--float-duration, 5s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
 }

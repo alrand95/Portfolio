@@ -132,12 +132,11 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
                         <motion.div
                             onClick={() => setSelectedItem(art)}
                             className="cursor-pointer group"
-                            whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            <ParallaxCard className="bg-black/80 backdrop-blur-sm border-white/5 hover:border-neon-pink/50 transition-colors">
+                            <ParallaxCard className="bg-black/90 border-white/5 hover:border-neon-pink/50 transition-colors">
                                 <div className="flex flex-col h-full">
-                                    <div className="w-full aspect-square bg-gray-900 rounded-[30px] mb-6 relative overflow-hidden group-hover:shadow-lg group-hover:shadow-neon-pink/20 transition-all">
+                                    <div className="w-full aspect-square bg-gray-900 rounded-[30px] mb-6 relative overflow-hidden group-hover:shadow-lg group-hover:shadow-neon-pink/20 transition-all shimmer-bg">
                                         {art.image_url ? (
                                             <Image
                                                 src={art.image_url}
@@ -192,7 +191,7 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
                         >
                             <div className="relative w-full flex-1 overflow-hidden group bg-black/50 flex items-center justify-center">
                                 <motion.div
-                                    className="relative w-full h-full flex items-center justify-center"
+                                    className="relative w-full h-full flex items-center justify-center will-change-transform"
                                     drag="x"
                                     dragConstraints={{ left: 0, right: 0 }}
                                     dragElastic={0.2}
@@ -211,7 +210,7 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
                                     )}
                                 </motion.div>
 
-                                <div className="hidden">
+                                <div className="relative hidden">
                                     {items.length > 1 && (
                                         <>
                                             {items[(items.findIndex(item => item.id === selectedItem.id) + 1) % items.length]?.image_url && (
