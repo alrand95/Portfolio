@@ -19,7 +19,7 @@ export function BunnyNav() {
 
     const navItems = [
         { name: t('nav.home'), url: "/", icon: Home },
-        { name: t('nav.about'), url: "/about", icon: User },
+        { name: t('nav.about'), url: "/cv", icon: User },
         { name: t('nav.blog'), url: "/blog", icon: PenTool },
         { name: t('nav.gallery'), url: "/gallery", icon: Sparkles },
         { name: t('nav.contact'), url: "/contact", icon: Mail },

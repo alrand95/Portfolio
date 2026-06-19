@@ -2,11 +2,23 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+    const url = request.nextUrl.clone();
+    const langParam = url.searchParams.get('lang');
     let response = NextResponse.next({
         request: {
             headers: request.headers,
         },
-    })
+    });
+
+    if (langParam === 'en' || langParam === 'ar') {
+        request.cookies.set('bunny-lang', langParam);
+        response = NextResponse.next({
+            request: {
+                headers: request.headers,
+            },
+        });
+        response.cookies.set('bunny-lang', langParam, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    }
 
     let user = null;
 

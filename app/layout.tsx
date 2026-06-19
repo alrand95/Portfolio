@@ -11,6 +11,7 @@ import { LanguageSelectionModal } from '@/components/LanguageSelectionModal';
 import { PublicBirthdayCelebration } from '@/components/celebrations/PublicBirthdayCelebration';
 import { EventPopup } from '@/components/EventPopup';
 import { recordVisit } from '@/app/actions/visits'; // Direct import
+import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const baloo = Baloo_2({ subsets: ['latin'], weight: ['400', '700', '800'], variable: '--font-baloo' });
@@ -20,12 +21,15 @@ export const metadata: Metadata = {
   title: 'Rand Albakhet | Creative Graphic Designer & Visual Artist',
   description: 'Portfolio of Rand Albakhet, a highly creative Graphic Designer with 6+ years of experience in Branding, Logo Design, and Digital Marketing. Based in Jordan, working globally.',
   keywords: ['Graphic Designer', 'Rand Albakhet', 'Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS', 'Best Portfolio Website', 'Best Graphic Design Portfolio', 'Best Website Design 2026', 'Best Custom Design', 'Top Rated Graphic Designer', 'Creative Portfolio Design', '3D Web Design', 'Interactive Portfolio', 'Award Winning Design', 'Best UX/UI Design', 'Branding', 'Logo Design', 'Typography', 'Visual Artist', 'Jordan', 'Freelance Designer', 'Modern Graphic Design', 'Luxury Branding', 'Professional Logo Designer', 'Social Media Graphics', 'Creative Director', 'Visual Identity Expert', 'Hire Graphic Designer', 'Unique Design Style'],
+  alternates: {
+    canonical: 'https://www.alrund.space/',
+  },
   openGraph: {
     title: 'Rand Albakhet | Creative Graphic Designer',
     description: 'Expert in Branding, Logo Design, and Visual Identity. 6+ years of global experience.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://alrand-portfolio.vercel.app',
+    url: 'https://www.alrund.space/',
   },
 };
 
@@ -35,7 +39,7 @@ const jsonLd = {
   name: 'Rand Albakhet',
   alternateName: ['Rand Khalid', 'Rand Khaled', 'Rund Khaled', 'Rund Khalid', 'AL RAND DESIGNS', 'AL RUND DESIGNS'],
   jobTitle: 'Graphic Designer',
-  url: 'https://alrand-portfolio.vercel.app',
+  url: 'https://www.alrund.space/',
   description: 'Highly creative and knowledgeable Graphic Designer with a strong background in developing and executing visual design.',
   address: {
     '@type': 'PostalAddress',
@@ -54,6 +58,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   let themeConfig = undefined;
+  let initialLang: 'en' | 'ar' = 'en';
 
   try {
     const supabase = await createClient();
@@ -62,19 +67,25 @@ export default async function RootLayout({
 
     // Track visit server-side
     await recordVisit();
+
+    const cookieStore = await cookies();
+    const cookieLang = cookieStore.get('bunny-lang')?.value;
+    if (cookieLang === 'en' || cookieLang === 'ar') {
+      initialLang = cookieLang;
+    }
   } catch (error) {
     console.error("RootLayout Error (Non-Critical):", error);
     // Proceed with default theme and no visit tracking
   }
 
   return (
-    <html className={cn(inter.variable, baloo.variable, cairo.variable)} suppressHydrationWarning>
+    <html lang={initialLang} dir={initialLang === 'ar' ? 'rtl' : 'ltr'} className={cn(inter.variable, baloo.variable, cairo.variable)} suppressHydrationWarning>
       <body className="font-sans antialiased bg-primary-bg text-foreground min-h-screen selection:bg-neon-pink selection:text-white overflow-x-hidden">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <LanguageProvider>
+        <LanguageProvider initialLang={initialLang}>
           <ThemeProvider initialTheme={themeConfig}>
             <PublicBirthdayCelebration />
             <EventPopup />

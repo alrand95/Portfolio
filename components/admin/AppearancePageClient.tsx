@@ -183,7 +183,7 @@ export function AppearancePageClient() {
                                 <label className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 block">Active Pages</label>
                                 <div className="space-y-2">
                                     {[
-                                        { img: 'About', path: '/about' },
+                                        { img: 'About', path: '/cv' },
                                         { img: 'Gallery', path: '/gallery' },
                                         { img: 'Contact', path: '/contact' }
                                     ].map((page) => {

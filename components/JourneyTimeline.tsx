@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring, useTransform, useMotionValue, useAnimatio
 import { useRef, useState, useEffect, memo } from 'react';
 import { Flag, Star, Trophy, MapPin, Sparkle, Zap, Activity, Cpu } from 'lucide-react';
 import { SparklesText } from '@/components/ui/sparkles-text';
+import { useLanguage } from '@/lib/i18n/context';
+import { translateResume } from '@/lib/i18n/translations';
 
 interface JourneyTimelineProps {
     experience: any[];
@@ -12,6 +14,7 @@ interface JourneyTimelineProps {
 const ExperienceCard = memo(({ job, index, isMobile, isEven, swerveWidth, itemHeight }: { job: any, index: number, isMobile: boolean, isEven: boolean, swerveWidth: number, itemHeight: number }) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
+    const { language } = useLanguage();
 
     const rotateX = useSpring(useTransform(y, [-100, 100], [10, -10]), { stiffness: 150, damping: 30 });
     const rotateY = useSpring(useTransform(x, [-100, 100], [-10, 10]), { stiffness: 150, damping: 30 });
@@ -33,6 +36,10 @@ const ExperienceCard = memo(({ job, index, isMobile, isEven, swerveWidth, itemHe
     }
 
     const yOffset = index * itemHeight + 240;
+
+    const roleTranslated = translateResume(job.role, language);
+    const companyTranslated = translateResume(job.company, language);
+    const endDateTranslated = job.end_date ? translateResume(job.end_date, language) : (language === 'ar' ? 'الآن' : 'LIVE');
 
     return (
         <motion.div
@@ -127,7 +134,7 @@ const ExperienceCard = memo(({ job, index, isMobile, isEven, swerveWidth, itemHe
                             </div>
                             <div className="flex flex-col items-end opacity-40 group-hover/card:opacity-100 transition-opacity">
                                 <span className="text-[9px] font-mono text-white/50 uppercase tracking-tighter">Sync_Complete</span>
-                                <span className="text-white font-mono text-[10px] font-bold">{job.start_date} // {job.end_date || 'LIVE'}</span>
+                                <span className="text-white font-mono text-[10px] font-bold">{job.start_date} // {endDateTranslated}</span>
                             </div>
                         </div>
 
@@ -143,7 +150,7 @@ const ExperienceCard = memo(({ job, index, isMobile, isEven, swerveWidth, itemHe
                                 }}
                                 className="text-3xl md:text-4xl font-black text-white mb-4 leading-none tracking-tight group-hover/card:text-neon-pink transition-colors"
                             >
-                                {job.role}
+                                {roleTranslated}
                             </motion.h3>
                         </div>
 
@@ -151,13 +158,13 @@ const ExperienceCard = memo(({ job, index, isMobile, isEven, swerveWidth, itemHe
                             style={{ y: useTransform(mouseY, [-100, 100], [-3, 3]) }}
                             className="text-base md:text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-10 flex items-center gap-2"
                         >
-                            <Cpu size={18} className="text-purple-400/50" /> {job.company}
+                            <Cpu size={18} className="text-purple-400/50" /> {companyTranslated}
                         </motion.h4>
 
                         <div className="flex flex-wrap gap-2.5 mt-auto">
-                            {(job.location || "Vision, Art, Code").split(',').map((tag: string, t: number) => (
+                            {(job.description || job.location || "Vision, Art, Code").split(',').map((tag: string, t: number) => (
                                 <span key={t} className="text-[9px] uppercase font-bold tracking-widest bg-white/5 text-white/40 px-3.5 py-1.5 rounded-lg border border-white/5 hover:bg-neon-pink/10 hover:text-neon-pink transition-all">
-                                    {tag.trim()}
+                                    {translateResume(tag.trim(), language)}
                                 </span>
                             ))}
                         </div>
@@ -435,6 +442,7 @@ const ParallaxBackgroundLine = memo(({ index, progress }: { index: number, progr
 ParallaxBackgroundLine.displayName = 'ParallaxBackgroundLine';
 
 export const JourneyTimeline = ({ experience }: JourneyTimelineProps) => {
+    const { t } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -660,12 +668,12 @@ export const JourneyTimeline = ({ experience }: JourneyTimelineProps) => {
                             initial={{ width: 0 }} whileInView={{ width: "120px" }}
                             className="h-[2px] bg-gradient-to-r from-transparent via-neon-pink to-transparent"
                         />
-                        <span className="text-neon-pink font-mono text-[9px] tracking-[0.8em] uppercase opacity-60">System Log Active</span>
+                        <span className="text-neon-pink font-mono text-[9px] tracking-[0.8em] uppercase opacity-60">{t('about.timeline_subtitle')}</span>
                     </div>
 
                     <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
                         <SparklesText
-                            text="The Adventure Log"
+                            text={t('about.timeline_title')}
                             colors={{ first: '#FF4DA6', second: '#A855F7' }}
                             className="text-5xl md:text-7xl !font-[family-name:var(--font-baloo)] text-white drop-shadow-[0_0_15px_rgba(255,77,166,0.6)]"
                         />

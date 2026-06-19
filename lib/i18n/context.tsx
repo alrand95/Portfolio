@@ -14,8 +14,8 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const [language, setLanguageState] = useState<Language>('en'); // Default to 'en' initially to match server
+export function LanguageProvider({ children, initialLang = 'en' }: { children: React.ReactNode; initialLang?: Language }) {
+    const [language, setLanguageState] = useState<Language>(initialLang);
     const [isLoaded, setIsLoaded] = useState(false);
     const [hasSelectedLanguage, setHasSelectedLanguage] = useState(false);
 
@@ -25,9 +25,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         if (savedLang && (savedLang === 'en' || savedLang === 'ar')) {
             setLanguageState(savedLang);
             setHasSelectedLanguage(true);
+        } else {
+            // Check query param as fallback on first load
+            const params = new URLSearchParams(window.location.search);
+            const queryLang = params.get('lang');
+            if (queryLang === 'en' || queryLang === 'ar') {
+                setLanguageState(queryLang as Language);
+                setHasSelectedLanguage(true);
+            }
         }
-        // If no saved lang, we stay at 'en' but 'isLoaded' will be true, 
-        // letting the Modal (which we'll build) decide to show itself.
         setIsLoaded(true);
     }, []);
 
@@ -35,17 +41,20 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         // Update document direction and lang attribute
         document.documentElement.lang = language;
         // User requested to keep layout LTR, so we disable RTL flipping
-        // document.documentElement.dir = dir(language); w
+        // document.documentElement.dir = dir(language);
 
         // Save to localStorage
         if (isLoaded && hasSelectedLanguage) { // Only save after initial load and explicit selection
             localStorage.setItem('bunny-lang', language);
+            document.cookie = `bunny-lang=${language}; path=/; max-age=31536000; SameSite=Lax`;
         }
     }, [language, isLoaded, hasSelectedLanguage]);
 
     const setLanguage = (lang: Language) => {
         setLanguageState(lang);
         setHasSelectedLanguage(true);
+        localStorage.setItem('bunny-lang', lang);
+        document.cookie = `bunny-lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
     };
 
     const t = (key: string): string => {

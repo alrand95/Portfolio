@@ -26,7 +26,7 @@ export const defaultHeroContent: HeroContent = {
     subtitle: "Carries A Spark",
     description: "GRAPHIC DESIGNER & FRONTEND WITCH.\nCreating digital chaos with style.",
     button_primary_text: "Profile 🐰",
-    button_primary_url: "/about",
+    button_primary_url: "/cv",
     button_secondary_text: "Gallery ✨",
     button_secondary_url: "/gallery"
 };

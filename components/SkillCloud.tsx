@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Sparkles, Zap, Star, Hexagon, Crown, Heart, PawPrint } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n/context';
+import { translateResume } from '@/lib/i18n/translations';
 
 interface SkillCloudProps {
     skills: any[];
@@ -20,7 +22,9 @@ const SkillCard = ({
     onToggle: () => void
 }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const skillName = typeof skill === 'string' ? skill : skill.name;
+    const { language } = useLanguage();
+    const skillNameRaw = typeof skill === 'string' ? skill : skill.name;
+    const skillName = translateResume(skillNameRaw, language);
 
     // Helper to get a random-ish icon based on string length if no icon provided
     const getIcon = (name: string, i: number) => {
@@ -215,6 +219,7 @@ const SkillCard = ({
 
 export const SkillCloud = ({ skills }: SkillCloudProps) => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const { t } = useLanguage();
 
     const handleToggle = (index: number) => {
         if (activeIndex === index) {
@@ -246,7 +251,7 @@ export const SkillCloud = ({ skills }: SkillCloudProps) => {
                     className="inline-block relative"
                 >
                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-[family-name:var(--font-baloo)] text-transparent bg-clip-text bg-gradient-to-br from-white via-pink-200 to-purple-200 drop-shadow-[0_4px_0_rgba(255,77,166,0.4)]">
-                        Magic Abilities
+                        {t('about.skills_title')}
                     </h2>
                     {/* Cute floating elements near title */}
                     <div className="absolute -top-4 -right-6 text-2xl md:text-4xl animate-bounce">✨</div>

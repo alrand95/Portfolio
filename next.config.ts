@@ -62,11 +62,20 @@ const nextConfig: NextConfig = {
       }
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: '/cv',
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
-        source: '/cv',
-        destination: '/cv.html',
+        source: '/vintage-cv',
+        destination: '/vintage-cv.html',
       },
     ]
   },
