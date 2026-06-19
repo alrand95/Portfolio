@@ -1,0 +1,756 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Special+Elite&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --strawberry:#C8233A;
+  --cherry:#E83B6F;
+  --cream:#FDF6EC;
+  --pastel-blue:#B8D4E8;
+  --soft-blue:#D6E9F5;
+  --soft-beige:#F5ECD7;
+  --warm-yellow:#F9D776;
+  --gingham-blue:#A8C8E0;
+  --vintage-pink:#F2B8C6;
+  --dark-text:#2C1810;
+  --medium-text:#5C3D2E;
+}
+
+body{
+  background: var(--cream);
+  font-family:'DM Sans',sans-serif;
+  color:var(--dark-text);
+  min-height:100vh;
+}
+
+.page-wrapper{
+  width:100%;
+  max-width:820px;
+  margin:0 auto;
+  padding:0 0 60px;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+}
+
+/* GINGHAM BG PATTERN */
+.gingham-header{
+  background-color: #C9DFF0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(255,255,255,0.6) 19px,rgba(255,255,255,0.6) 20px),
+    repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(255,255,255,0.6) 19px,rgba(255,255,255,0.6) 20px);
+  padding:40px 30px 30px;
+  position:relative;
+}
+
+/* ---- DECORATIVE SVG ELEMENTS ---- */
+.strawberry{display:inline-block;font-size:22px}
+
+.washi-tape{
+  height:28px;
+  position:absolute;
+  opacity:0.85;
+  border-radius:2px;
+  transform:rotate(-2deg);
+}
+.washi-tape.pink{background: repeating-linear-gradient(45deg,#F2B8C6,#F2B8C6 6px,#E8A0B8 6px,#E8A0B8 12px);}
+.washi-tape.blue{background: repeating-linear-gradient(45deg,#B8D4E8,#B8D4E8 6px,#A0C4DE 6px,#A0C4DE 12px);}
+.washi-tape.yellow{background: repeating-linear-gradient(45deg,#F9D776,#F9D776 6px,#F0C860 6px,#F0C860 12px);}
+.washi-tape.strawberry-tape{background: repeating-linear-gradient(45deg,#C8233A,#C8233A 6px,#A81C2E 6px,#A81C2E 12px); opacity:0.7;}
+
+/* TORN PAPER EFFECT */
+.torn-paper{
+  background:white;
+  position:relative;
+  padding:20px;
+  box-shadow:2px 3px 8px rgba(0,0,0,0.12);
+}
+.torn-paper::before{
+  content:'';
+  position:absolute;
+  top:-8px;left:0;right:0;height:12px;
+  background:white;
+  clip-path:polygon(0 100%,2% 20%,4% 80%,6% 10%,8% 70%,10% 20%,12% 90%,14% 30%,16% 80%,18% 10%,20% 70%,22% 20%,24% 90%,26% 40%,28% 80%,30% 20%,32% 60%,34% 10%,36% 80%,38% 30%,40% 70%,42% 20%,44% 90%,46% 40%,48% 80%,50% 10%,52% 70%,54% 30%,56% 80%,58% 20%,60% 60%,62% 10%,64% 80%,66% 40%,68% 70%,70% 20%,72% 90%,74% 30%,76% 80%,78% 10%,80% 60%,82% 20%,84% 80%,86% 40%,88% 70%,90% 20%,92% 90%,94% 30%,96% 70%,98% 20%,100% 100%);
+}
+
+/* PAPER CLIP */
+.paper-clip{
+  width:28px;height:50px;
+  position:absolute;top:-12px;left:24px;
+  z-index:10;
+}
+.paper-clip svg path{stroke:#8899AA;stroke-width:3;fill:none;stroke-linecap:round}
+
+/* POLAROID */
+.polaroid{
+  background:white;
+  padding:12px 12px 40px;
+  box-shadow:3px 3px 10px rgba(0,0,0,0.15);
+  display:inline-block;
+  position:relative;
+  font-family:'Caveat',cursive;
+}
+.polaroid-caption{
+  text-align:center;
+  margin-top:6px;
+  font-size:14px;
+  color:var(--medium-text);
+}
+
+/* NOTEBOOK LINES */
+.notebook-section{
+  background:#FAFFF9;
+  background-image:repeating-linear-gradient(to bottom,transparent,transparent 27px,#C8DFF0 27px,#C8DFF0 28px);
+  padding:20px 20px 20px 60px;
+  border-left:4px solid var(--vintage-pink);
+  position:relative;
+  font-family:'DM Sans',sans-serif;
+  line-height:28px;
+}
+.notebook-section::before{
+  content:'';
+  position:absolute;left:48px;top:0;bottom:0;width:2px;
+  background:var(--vintage-pink);
+  opacity:0.4;
+}
+
+/* VINTAGE LABEL */
+.vintage-label{
+  display:inline-block;
+  background:var(--warm-yellow);
+  border:2px solid #D4A820;
+  border-radius:4px;
+  padding:4px 14px;
+  font-family:'Special Elite',serif;
+  font-size:12px;
+  color:#5C3D2E;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  position:relative;
+}
+.vintage-label::before,.vintage-label::after{
+  content:'✦';
+  margin:0 4px;
+  opacity:0.6;
+}
+
+/* BOW SVG */
+.bow{display:inline-block;position:relative;top:-2px;}
+
+/* SECTION DIVIDER */
+.section-divider{
+  display:flex;align-items:center;gap:12px;
+  margin:28px 20px 18px;
+}
+.section-divider .line{flex:1;height:1px;background:linear-gradient(to right,transparent,#C8233A,transparent)}
+.section-divider .label{
+  font-family:'Caveat',cursive;
+  font-size:18px;
+  color:var(--strawberry);
+  white-space:nowrap;
+}
+
+/* SKILL TAGS */
+.skill-tag{
+  display:inline-block;
+  background:var(--soft-blue);
+  border:1.5px solid var(--gingham-blue);
+  border-radius:20px;
+  padding:4px 14px;
+  font-size:12px;
+  font-family:'DM Sans',sans-serif;
+  color:#2A5A7A;
+  margin:3px;
+}
+.skill-tag.red{background:#FFE8EC;border-color:#F2B8C6;color:#8B1A2E;}
+.skill-tag.yellow{background:#FFF8DC;border-color:#D4A820;color:#7A5800;}
+.skill-tag.green{background:#E8F5E9;border-color:#A5D6A7;color:#2E7D32;}
+
+/* EXPERIENCE CARD */
+.exp-card{
+  background:white;
+  border-left:4px solid var(--cherry);
+  border-radius:0 8px 8px 0;
+  padding:14px 18px;
+  margin:10px 0;
+  box-shadow:2px 2px 6px rgba(200,35,58,0.08);
+  position:relative;
+}
+.exp-card .role{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--strawberry);}
+.exp-card .company{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--medium-text);}
+.exp-card .meta{font-family:'Caveat',cursive;font-size:13px;color:#888;margin-top:2px;}
+.exp-card .dots{font-size:12px;color:var(--medium-text);margin-top:6px;line-height:1.6}
+
+/* TIMELINE */
+.timeline-wrap{position:relative;padding:10px 0 10px 36px;}
+.timeline-wrap::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cherry),var(--strawberry),var(--pastel-blue));}
+.tl-item{position:relative;margin:12px 0;}
+.tl-dot{
+  width:20px;height:20px;border-radius:50%;
+  background:white;border:3px solid var(--cherry);
+  position:absolute;left:-29px;top:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;color:var(--cherry);
+  box-shadow:0 0 0 3px rgba(200,35,58,0.1);
+}
+.tl-year{font-family:'Caveat',cursive;font-size:13px;color:var(--strawberry);font-weight:700;}
+.tl-desc{font-size:12px;color:var(--medium-text);line-height:1.5;}
+
+/* QUOTE CARD */
+.quote-card{
+  background:linear-gradient(135deg,var(--soft-blue),var(--vintage-pink) 100%);
+  border-radius:12px;
+  padding:24px 28px;
+  position:relative;
+  margin:16px 20px;
+  box-shadow:3px 3px 12px rgba(0,0,0,0.1);
+}
+.quote-mark{font-size:72px;font-family:'Playfair Display',serif;color:var(--strawberry);opacity:0.2;position:absolute;top:-10px;left:14px;line-height:1;}
+.quote-text{font-family:'Caveat',cursive;font-size:18px;color:var(--dark-text);line-height:1.6;font-weight:700;}
+
+/* CONTACT CARD */
+.contact-strip{
+  background:var(--strawberry);
+  color:white;
+  padding:16px 24px;
+  display:flex;gap:20px;flex-wrap:wrap;align-items:center;
+  font-size:13px;
+  font-family:'DM Sans',sans-serif;
+}
+.contact-item{display:flex;align-items:center;gap:8px;}
+.contact-label{opacity:0.75;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+
+/* STICKER */
+.sticker{
+  background:var(--warm-yellow);
+  border-radius:50%;
+  width:64px;height:64px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.12);
+  position:absolute;
+}
+
+/* DECO BUTTON */
+.deco-btn{
+  display:inline-block;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--cherry);
+  border:3px solid white;
+  box-shadow:0 0 0 1.5px var(--cherry);
+  vertical-align:middle;
+  margin:0 3px;
+}
+.deco-btn.blue{background:var(--gingham-blue);box-shadow:0 0 0 1.5px var(--gingham-blue);}
+.deco-btn.yellow{background:var(--warm-yellow);box-shadow:0 0 0 1.5px #D4A820;}
+
+/* GRID HELPERS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 20px;}
+
+/* SECTION CARD */
+.section-card{
+  background:white;
+  border-radius:10px;
+  padding:18px;
+  border:1.5px solid rgba(200,35,58,0.12);
+  box-shadow:1px 2px 8px rgba(0,0,0,0.07);
+}
+.section-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:700;
+  color:var(--strawberry);
+  margin-bottom:10px;
+  border-bottom:1px dashed var(--vintage-pink);
+  padding-bottom:6px;
+}
+
+/* STAR DECO */
+.star-row{color:var(--strawberry);font-size:12px;letter-spacing:4px;text-align:center;margin:6px 0;}
+
+/* INTERESTS CARD */
+.interest-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:white;
+  border:1.5px solid var(--vintage-pink);
+  border-radius:20px;
+  padding:6px 14px;
+  margin:4px;
+  font-size:12.5px;
+  color:var(--dark-text);
+  box-shadow:1px 1px 4px rgba(0,0,0,0.07);
+}
+.interest-emoji{font-size:16px;}
+
+/* CHERRY DECORATION */
+.cherry-deco{font-size:18px;}
+
+/* LANG BAR */
+.lang-bar{height:8px;border-radius:4px;margin-top:4px;}
+.lang-native{background:linear-gradient(to right,var(--strawberry),var(--cherry));width:100%;}
+.lang-pro{background:linear-gradient(to right,var(--pastel-blue),var(--gingham-blue));width:85%;}
+
+/* SPARKLE DECO */
+.sparkle{display:inline;font-size:14px;opacity:0.8;}
+
+/* FLORAL BORDER */
+.floral-row{text-align:center;font-size:16px;letter-spacing:6px;color:var(--cherry);opacity:0.7;margin:8px 0;}
+</style>
+
+<div class="page-wrapper">
+
+<!-- ======= HEADER: GINGHAM SECTION ======= -->
+<div class="gingham-header">
+  <div class="washi-tape pink" style="top:0;left:60px;width:180px;transform:rotate(-1deg)"></div>
+  <div class="washi-tape yellow" style="top:0;right:80px;width:140px;transform:rotate(1.5deg)"></div>
+
+  <!-- Header content -->
+  <div style="background:white;border-radius:12px;padding:24px 28px;position:relative;box-shadow:4px 4px 18px rgba(0,0,0,0.13);margin-top:16px;">
+    <!-- Paper clip decoration -->
+    <div style="position:absolute;top:-20px;left:28px;z-index:20">
+      <svg width="22" height="48" viewBox="0 0 22 48"><path d="M11 4 C4 4 4 16 4 16 L4 38 C4 44 18 44 18 38 L18 14 C18 8 6 8 6 14 L6 36 C6 40 16 40 16 36 L16 18" stroke="#9AAABB" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+
+    <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;">
+      <!-- Avatar circle / polaroid style -->
+      <div class="polaroid" style="transform:rotate(-3deg);flex-shrink:0;width:110px;">
+        <div style="width:86px;height:86px;background:linear-gradient(135deg,var(--vintage-pink),var(--pastel-blue));border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:32px;">🎨</div>
+        <div class="polaroid-caption">AL RAND</div>
+      </div>
+
+      <!-- Name & title block -->
+      <div style="flex:1;min-width:200px;">
+        <div class="vintage-label" style="margin-bottom:8px;font-size:10px">✦ Portfolio ✦</div>
+        <h1 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--strawberry);line-height:1;margin:6px 0 4px;">RAND</h1>
+        <h1 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--dark-text);line-height:1;margin:0 0 10px;">ALBAKHET</h1>
+        <div style="font-family:'Caveat',cursive;font-size:14px;color:var(--medium-text);line-height:1.7;">
+          Head of Packaging Design<br>
+          Senior Graphic Designer<br>
+          Brand Identity Specialist<br>
+          Creative Lead
+        </div>
+        <div style="margin-top:10px;">
+          <span class="deco-btn"></span>
+          <span class="deco-btn blue"></span>
+          <span class="deco-btn yellow"></span>
+          <span style="font-family:'Special Elite',serif;font-size:11px;color:var(--medium-text);margin-left:6px;letter-spacing:1px">AL RAND DESIGNS</span>
+        </div>
+      </div>
+
+      <!-- Strawberry sticker cluster -->
+      <div style="flex-shrink:0;text-align:center;font-size:30px;line-height:1.4">
+        🍓<br>🍒<br>✨
+      </div>
+    </div>
+
+    <!-- Decorative floral row -->
+    <div class="floral-row" style="margin-top:12px;">❀ ❀ ❀ ❀ ❀</div>
+  </div>
+
+  <!-- Contact strip inside header -->
+  <div class="contact-strip" style="margin-top:20px;border-radius:8px;">
+    <div class="contact-item">
+      <span style="font-size:16px">📍</span>
+      <div><div class="contact-label">Location</div>Zarqa, Jordan</div>
+    </div>
+    <div class="contact-item">
+      <span style="font-size:16px">📧</span>
+      <div><div class="contact-label">Email</div>randkhaled1995@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <span style="font-size:16px">📞</span>
+      <div><div class="contact-label">Phone</div>+962799167626</div>
+    </div>
+    <div class="contact-item">
+      <span style="font-size:16px">🍓</span>
+      <div><div class="contact-label">Brand</div>AL RAND DESIGNS</div>
+    </div>
+  </div>
+</div>
+
+<!-- WASHI TAPE SEPARATOR -->
+<div style="position:relative;height:24px;overflow:hidden;">
+  <div class="washi-tape blue" style="top:0;left:0;width:35%;transform:rotate(0deg);border-radius:0;"></div>
+  <div class="washi-tape pink" style="top:0;left:33%;width:34%;transform:rotate(0deg);border-radius:0;"></div>
+  <div class="washi-tape yellow" style="top:0;left:65%;width:36%;transform:rotate(0deg);border-radius:0;"></div>
+</div>
+
+<!-- ======= ABOUT ME + VISION/MISSION ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">🍓 About Me ✨</div>
+  <div class="line"></div>
+</div>
+
+<div style="padding:0 20px;">
+  <div class="notebook-section" style="border-radius:8px;">
+    <p style="font-size:13.5px;line-height:1.9;color:var(--dark-text);">
+      Creative Graphic Designer with <strong>6+ years of experience</strong> specializing in Branding, Packaging Design, Visual Identity Systems, Product Label Design, Social Media Campaigns, and Creative Marketing Solutions. Passionate about transforming ideas into memorable visual stories that strengthen brands and create meaningful audience connections.
+    </p>
+  </div>
+</div>
+
+<div class="two-col" style="margin-top:16px;padding:0 20px;">
+  <!-- Vision -->
+  <div style="background:linear-gradient(135deg,#FFE8EC,#FFF0F4);border-radius:10px;padding:16px;border:1.5px solid var(--vintage-pink);position:relative;">
+    <div class="washi-tape pink" style="top:-8px;left:20px;width:60px;height:18px;font-size:9px;display:flex;align-items:center;justify-content:center;border-radius:2px;"></div>
+    <div style="font-size:20px;margin-bottom:6px;">🔭</div>
+    <div class="vintage-label" style="font-size:9px;margin-bottom:8px;background:var(--cherry);border-color:var(--cherry);color:white;">Vision</div>
+    <p style="font-family:'Caveat',cursive;font-size:14px;line-height:1.6;color:var(--dark-text);">
+      To transform ideas into inspiring visual stories that leave a lasting impression and build authentic connections between brands and people.
+    </p>
+  </div>
+  <!-- Mission -->
+  <div style="background:linear-gradient(135deg,#E8F4FF,#EEF8FF);border-radius:10px;padding:16px;border:1.5px solid var(--pastel-blue);position:relative;">
+    <div class="washi-tape blue" style="top:-8px;left:20px;width:60px;height:18px;border-radius:2px;"></div>
+    <div style="font-size:20px;margin-bottom:6px;">🎯</div>
+    <div class="vintage-label" style="font-size:9px;margin-bottom:8px;background:var(--pastel-blue);border-color:var(--gingham-blue);color:#2A5A7A;">Mission</div>
+    <p style="font-family:'Caveat',cursive;font-size:14px;line-height:1.6;color:var(--dark-text);">
+      To blend creativity, strategy, and innovation to craft unique visual identities and design experiences that empower businesses, elevate brands, and bring ideas to life.
+    </p>
+  </div>
+</div>
+
+<!-- ======= CAREER TIMELINE ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">🍒 Career Journey</div>
+  <div class="line"></div>
+</div>
+
+<div style="padding:0 20px;">
+  <div style="background:white;border-radius:12px;padding:20px 24px;border:1.5px solid rgba(200,35,58,0.12);box-shadow:2px 2px 10px rgba(0,0,0,0.07);position:relative;">
+    <!-- paper clip top -->
+    <div style="position:absolute;top:-18px;right:28px;">
+      <svg width="20" height="44" viewBox="0 0 22 48"><path d="M11 4 C4 4 4 16 4 16 L4 38 C4 44 18 44 18 38 L18 14 C18 8 6 8 6 14 L6 36 C6 40 16 40 16 36 L16 18" stroke="#F2B8C6" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:13px;color:var(--strawberry);margin-bottom:14px;font-style:italic;">Software Engineering Graduate → Head of Packaging Design</div>
+
+    <div class="timeline-wrap">
+      <div class="tl-item">
+        <div class="tl-dot">⭐</div>
+        <div class="tl-year">2013</div>
+        <div class="tl-desc">Bachelor's Degree — Software Engineering, The Hashemite University</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🎓</div>
+        <div class="tl-year">2017</div>
+        <div class="tl-desc">Graphic Designer — KSA Academy, Al Zarqa (3 months)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">✏️</div>
+        <div class="tl-year">2018</div>
+        <div class="tl-desc">Graphic Design Diploma — Horizon Apex Institute · Trainee at Advertising Offices, Amman & Graphic Designer + IT Support at A.I.C.S Schools (6 mo each)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🌐</div>
+        <div class="tl-year">2019</div>
+        <div class="tl-desc">Launched <strong>AL RAND DESIGNS</strong> — Freelance worldwide (Branding, Packaging, Social Media, Marketing, Labels, Campaigns)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">📷</div>
+        <div class="tl-year">2020</div>
+        <div class="tl-desc">Graphic Designer — ORYX FOR, Macca, Freelancer (3 months)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">📜</div>
+        <div class="tl-year">2021</div>
+        <div class="tl-desc">Professional Photography Certificate — International College London (ICL), November 2021</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🍓</div>
+        <div class="tl-year">2023</div>
+        <div class="tl-desc">Graphic Designer — Shabib Marketing, Al Zarqa (4 months) · Zalatimo Brothers, Shmeisani (3 months)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">📱</div>
+        <div class="tl-year">2023–24</div>
+        <div class="tl-desc">Graphic Designer & Social Media Manager — Fast Solutions Marketing (Remote, 3 months)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">👑</div>
+        <div class="tl-year">2025–26</div>
+        <div class="tl-desc"><strong>Head of Label & Packaging Dept.</strong> — Al Sahab Manufacturing & Packaging Company (Oct 2025 – Feb 2026)</div>
+      </div>
+    </div>
+
+    <div class="star-row">★ ★ ★ ★ ★ ★ ★</div>
+  </div>
+</div>
+
+<!-- ======= WORK EXPERIENCE ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">📌 Work Experience</div>
+  <div class="line"></div>
+</div>
+
+<div style="padding:0 20px;display:grid;gap:10px;">
+
+  <!-- HEAD OF PACKAGING -->
+  <div class="exp-card" style="border-left-color:var(--strawberry);">
+    <div style="position:absolute;top:-8px;right:12px;font-size:18px;">👑</div>
+    <div class="role">Head of Label & Packaging Department</div>
+    <div class="company">Al Sahab Manufacturing & Packaging Company</div>
+    <div class="meta">📅 October 2025 – February 2026</div>
+    <div class="dots" style="margin-top:8px;">
+      • Led the Label & Packaging Department &nbsp;• Supervised packaging and label projects<br>
+      • Designed skincare and personal care product packaging<br>
+      • Managed product label creation and packaging development<br>
+      • Coordinated with production and marketing teams<br>
+      • Ensured brand consistency and packaging quality standards
+    </div>
+  </div>
+
+  <!-- FAST SOLUTIONS -->
+  <div class="exp-card">
+    <div style="position:absolute;top:-8px;right:12px;font-size:18px;">💻</div>
+    <div class="role">Graphic Designer & Social Media Manager</div>
+    <div class="company">Fast Solutions Marketing Company</div>
+    <div class="meta">📍 Remote &nbsp;|&nbsp; ⏱ 3 Months</div>
+    <div class="dots">
+      • Managed social media accounts &nbsp;• Created content strategies<br>
+      • Designed marketing campaigns &nbsp;• Developed promotional materials<br>
+      • Increased audience engagement
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <!-- SHABIB -->
+    <div class="exp-card" style="border-left-color:#E83B6F;">
+      <div class="role" style="font-size:13px;">Graphic Designer</div>
+      <div class="company">Shabib Marketing</div>
+      <div class="meta">📍 Al Zarqa, Jordan &nbsp;|&nbsp; 2023 — 4 months</div>
+    </div>
+    <!-- ZALATIMO -->
+    <div class="exp-card" style="border-left-color:#E83B6F;">
+      <div class="role" style="font-size:13px;">Graphic Designer</div>
+      <div class="company">Zalatimo Brothers</div>
+      <div class="meta">📍 Shmeisani, Jordan &nbsp;|&nbsp; 2023 — 3 months</div>
+    </div>
+    <!-- ORYX -->
+    <div class="exp-card" style="border-left-color:var(--pastel-blue);">
+      <div class="role" style="font-size:13px;">Graphic Designer</div>
+      <div class="company">ORYX FOR, Freelancer</div>
+      <div class="meta">📍 Macca &nbsp;|&nbsp; 2020 — 3 months</div>
+    </div>
+    <!-- AICS -->
+    <div class="exp-card" style="border-left-color:var(--pastel-blue);">
+      <div class="role" style="font-size:13px;">Graphic Designer & IT Support</div>
+      <div class="company">A.I.C.S Schools</div>
+      <div class="meta">📍 Shafa Badran, Jordan &nbsp;|&nbsp; 2018 — 6 months</div>
+    </div>
+    <!-- ADV OFFICES -->
+    <div class="exp-card" style="border-left-color:var(--warm-yellow);">
+      <div class="role" style="font-size:13px;">Graphic Designer (Trainee)</div>
+      <div class="company">Advertising Offices</div>
+      <div class="meta">📍 Amman, Jordan &nbsp;|&nbsp; 2018 — 6 months</div>
+    </div>
+    <!-- KSA ACADEMY -->
+    <div class="exp-card" style="border-left-color:var(--warm-yellow);">
+      <div class="role" style="font-size:13px;">Graphic Designer</div>
+      <div class="company">KSA Academy</div>
+      <div class="meta">📍 Al Zarqa, Jordan &nbsp;|&nbsp; 2017 — 3 months</div>
+    </div>
+  </div>
+
+  <!-- FREELANCE -->
+  <div class="exp-card" style="border-left-color:var(--strawberry);background:linear-gradient(to right,#FFF0F4,white);">
+    <div style="position:absolute;top:-8px;right:12px;font-size:18px;">🌍</div>
+    <div class="role">Freelance Graphic Designer — AL RAND DESIGNS</div>
+    <div class="meta">📅 2019 – Present &nbsp;|&nbsp; Clients Worldwide</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+      <span class="skill-tag red">Branding</span>
+      <span class="skill-tag red">Packaging</span>
+      <span class="skill-tag red">Social Media</span>
+      <span class="skill-tag red">Marketing Materials</span>
+      <span class="skill-tag red">Product Labels</span>
+      <span class="skill-tag red">Ad Campaigns</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======= QUOTE ======= -->
+<div class="quote-card">
+  <div class="quote-mark">"</div>
+  <div class="quote-text" style="padding-left:20px;padding-top:10px;">
+    I have been working as a freelancer for over 8 years with clients from around the world.
+  </div>
+  <div style="text-align:right;margin-top:8px;font-family:'Caveat',cursive;font-size:13px;color:var(--medium-text);">— Rand Albakhet, AL RAND DESIGNS</div>
+</div>
+
+<!-- ======= EDUCATION & CERTIFICATIONS ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">🎓 Education & Certs</div>
+  <div class="line"></div>
+</div>
+
+<div class="two-col">
+  <!-- Education -->
+  <div class="section-card">
+    <h3>🎓 Education</h3>
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--dark-text);">Graphic Design Diploma</div>
+      <div style="font-family:'Caveat',cursive;font-size:13px;color:var(--medium-text);">Horizon Apex Institute · 2018</div>
+    </div>
+    <div style="border-top:1px dashed var(--vintage-pink);padding-top:12px;">
+      <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--dark-text);">Bachelor's in Software Engineering</div>
+      <div style="font-family:'Caveat',cursive;font-size:13px;color:var(--medium-text);">The Hashemite University · 2013</div>
+    </div>
+  </div>
+  <!-- Certifications -->
+  <div class="section-card">
+    <h3>📜 Certifications</h3>
+    <div style="background:var(--soft-beige);border-radius:8px;padding:12px;border:1px dashed #D4A820;">
+      <div style="font-size:16px;margin-bottom:4px;">📷</div>
+      <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--dark-text);">Professional Photography Training</div>
+      <div style="font-family:'Caveat',cursive;font-size:12px;color:var(--medium-text);margin-top:2px;">International College in London (ICL)</div>
+      <div class="vintage-label" style="font-size:9px;margin-top:8px;">November 2021</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SKILLS & TOOLS ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">✨ Skills & Tools</div>
+  <div class="line"></div>
+</div>
+
+<div class="three-col" style="padding:0 20px;">
+  <!-- Skills -->
+  <div class="section-card" style="grid-column:1/3;">
+    <h3>🎨 Design Skills</h3>
+    <div>
+      <span class="skill-tag red">Logo Design</span>
+      <span class="skill-tag red">Branding</span>
+      <span class="skill-tag red">Typography</span>
+      <span class="skill-tag red">Packaging Design</span>
+      <span class="skill-tag red">Label Design</span>
+      <span class="skill-tag red">Visual Identity</span>
+      <span class="skill-tag">Digital Marketing</span>
+      <span class="skill-tag">Campaign Development</span>
+      <span class="skill-tag">Social Media Mgmt</span>
+      <span class="skill-tag">Content Creation</span>
+      <span class="skill-tag">Creative Direction</span>
+      <span class="skill-tag yellow">Video Editing</span>
+      <span class="skill-tag yellow">Photography</span>
+      <span class="skill-tag yellow">Adobe Creative Suite</span>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="section-card">
+    <h3>🌐 Languages</h3>
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:500;">Arabic</span>
+        <span class="vintage-label" style="font-size:9px;">Native</span>
+      </div>
+      <div class="lang-bar lang-native"></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:500;">English</span>
+        <span class="vintage-label" style="font-size:9px;">Professional</span>
+      </div>
+      <div class="lang-bar lang-pro"></div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-top:14px;">
+  <!-- Tools -->
+  <div class="section-card">
+    <h3>🛠 Creative Tools</h3>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🎨</span> Adobe Photoshop
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">✏️</span> Adobe Illustrator
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">📰</span> Adobe InDesign
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">📷</span> Adobe Lightroom
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🖌</span> Canva
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">💎</span> Figma
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">💼</span> Microsoft Office
+      </div>
+    </div>
+  </div>
+  <!-- AI Tools -->
+  <div class="section-card">
+    <h3>🤖 AI Tools</h3>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">💬</span> ChatGPT
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🖼</span> Midjourney
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🦁</span> Leonardo AI
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🔥</span> Adobe Firefly
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">✨</span> Canva AI
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;">
+        <span style="font-size:16px;">🎬</span> Runway
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= INTERESTS ======= -->
+<div class="section-divider">
+  <div class="line"></div>
+  <div class="label">🍓 Interests & Personality</div>
+  <div class="line"></div>
+</div>
+
+<div style="padding:0 20px;text-align:center;">
+  <div style="background:white;border-radius:12px;padding:20px;border:1.5px solid var(--vintage-pink);box-shadow:2px 2px 10px rgba(0,0,0,0.07);">
+    <div class="washi-tape pink" style="top:-8px;left:50%;transform:translateX(-50%);width:100px;position:relative;margin:0 auto -14px;"></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:10px;">
+      <div class="interest-pill"><span class="interest-emoji">🍽</span> Culinary</div>
+      <div class="interest-pill"><span class="interest-emoji">✈️</span> Travel</div>
+      <div class="interest-pill"><span class="interest-emoji">📷</span> Photography</div>
+      <div class="interest-pill"><span class="interest-emoji">🎨</span> Arts & Crafts</div>
+      <div class="interest-pill"><span class="interest-emoji">📓</span> Creative Journaling</div>
+      <div class="interest-pill"><span class="interest-emoji">🔍</span> True Crime Thrillers</div>
+      <div class="interest-pill"><span class="interest-emoji">🐸</span> Frog Lover</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= FOOTER DECORATIVE BAND ======= -->
+<div style="margin-top:30px;position:relative;">
+  <div class="washi-tape strawberry-tape" style="position:relative;top:0;left:0;right:0;width:100%;height:26px;border-radius:0;transform:none;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Caveat',cursive;font-size:13px;color:white;letter-spacing:6px;opacity:0.9;">✦ AL RAND DESIGNS ✦ ZARQA, JORDAN ✦ 2019 – PRESENT ✦</span>
+  </div>
+
+  <div style="text-align:center;padding:20px;background:white;margin:0 20px;border-radius:0 0 12px 12px;border:1.5px solid rgba(200,35,58,0.1);border-top:none;">
+    <div style="font-size:28px;letter-spacing:8px;margin-bottom:8px;">🍓 🍒 ✨ 🍓 🍒</div>
+    <div style="font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--strawberry);margin-bottom:4px;">Rand Albakhet</div>
+    <div style="font-family:'Special Elite',serif;font-size:11px;color:var(--medium-text);letter-spacing:2px;">HEAD OF PACKAGING DESIGN · SENIOR GRAPHIC DESIGNER</div>
+    <div style="font-family:'Caveat',cursive;font-size:12px;color:#999;margin-top:8px;">📧 randkhaled1995@gmail.com &nbsp;|&nbsp; 📞 +962799167626</div>
+    <div class="floral-row" style="margin-top:12px;font-size:14px;">❀ ❀ ❀ ❀ ❀ ❀ ❀</div>
+  </div>
+</div>
+
+</div>
