@@ -6,15 +6,24 @@ import { ParallaxCard } from "@/components/ParallaxCard";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X, Filter, ChevronDown, Check } from "lucide-react";
 
+import { useLanguage } from "@/lib/i18n/context";
+import { GlowButton } from "@/components/GlowButton";
+
 interface GalleryPageClientProps {
     initialItems: any[];
 }
 
 export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
+    const { t } = useLanguage();
     const [items] = useState<any[]>(initialItems);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [showCollectionMenu, setShowCollectionMenu] = useState(false);
+    const [visibleCount, setVisibleCount] = useState(9);
+
+    useEffect(() => {
+        setVisibleCount(9);
+    }, [selectedTag]);
 
     const handleNext = useCallback((e?: React.MouseEvent) => {
         e?.stopPropagation();
@@ -58,6 +67,8 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
     const filteredItems = selectedTag
         ? items.filter(item => item.tags && item.tags.includes(selectedTag))
         : items;
+
+    const visibleItems = filteredItems.slice(0, visibleCount);
 
     return (
         <main className="min-h-screen pt-32 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
@@ -127,7 +138,7 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
             <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
                 {filteredItems.length === 0 && <p className="text-center text-gray-500 col-span-full">No artwork planted yet.</p>}
 
-                {filteredItems.map((art) => (
+                {visibleItems.map((art) => (
                     <div key={art.id} className="break-inside-avoid">
                         <motion.div
                             onClick={() => setSelectedItem(art)}
@@ -171,6 +182,17 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
                     </div>
                 ))}
             </div>
+
+            {visibleCount < filteredItems.length && (
+                <div className="flex justify-center mt-16">
+                    <GlowButton 
+                        variant="primary" 
+                        onClick={() => setVisibleCount(prev => prev + 9)}
+                    >
+                        {t('gallery.load_more')}
+                    </GlowButton>
+                </div>
+            )}
 
             <AnimatePresence>
                 {selectedItem && (

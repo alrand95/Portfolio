@@ -16,7 +16,8 @@ export type TranslationKeys =
     | 'nav.contact'
     | 'modal.title'
     | 'modal.select_language'
-    | 'modal.confirm';
+    | 'modal.confirm'
+    | 'gallery.load_more';
 
 export const translations: Record<Language, Record<string, string>> = {
     en: {
@@ -40,6 +41,9 @@ export const translations: Record<Language, Record<string, string>> = {
         'modal.title': 'Choose Your Experience',
         'modal.select_language': 'Select Language',
         'modal.confirm': 'Enter',
+
+        // Gallery
+        'gallery.load_more': 'Load More',
 
         // Contact
         'contact.headline': 'Let\'s Make Magic Together',
@@ -80,6 +84,9 @@ export const translations: Record<Language, Record<string, string>> = {
         'modal.title': 'اختر تجربتك',
         'modal.select_language': 'اختر اللغة',
         'modal.confirm': 'دخول',
+
+        // Gallery
+        'gallery.load_more': 'تحميل المزيد',
 
         // Contact
         'contact.headline': 'لنصنع السحر معاً',
