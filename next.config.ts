@@ -62,6 +62,14 @@ const nextConfig: NextConfig = {
       }
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/cv',
+        destination: '/cv.html',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
