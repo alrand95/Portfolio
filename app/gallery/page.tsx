@@ -145,20 +145,21 @@ export default function GalleryPage() {
                 {filteredItems.map((art) => (
                     <div key={art.id} className="break-inside-avoid">
                         <motion.div
-                            layoutId={`card-${art.id}`}
                             onClick={() => setSelectedItem(art)}
-                            className="cursor-pointer"
+                            className="cursor-pointer group"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             <ParallaxCard className="bg-black/80 backdrop-blur-sm border-white/5 hover:border-neon-pink/50 transition-colors">
                                 <div className="flex flex-col h-full">
-                                    <div className="w-full aspect-auto bg-gray-900 rounded-[30px] mb-6 relative overflow-hidden">
+                                    <div className="w-full aspect-square bg-gray-900 rounded-[30px] mb-6 relative overflow-hidden group-hover:shadow-lg group-hover:shadow-neon-pink/20 transition-all">
                                         {art.image_url ? (
                                             <Image
                                                 src={art.image_url}
                                                 alt={art.caption || 'Gallery Image'}
-                                                width={500}
-                                                height={500}
-                                                className="w-full h-auto object-cover"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
                                             />
                                         ) : (
                                             <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/20 via-black to-neon-blue/20 opacity-80" />
@@ -195,17 +196,20 @@ export default function GalleryPage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md p-4"
+                        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 md:p-8"
                         onClick={() => setSelectedItem(null)}
                     >
                         <motion.div
-                            layoutId={`card-${selectedItem.id}`}
-                            className="w-full max-w-6xl h-[85vh] bg-black rounded-[32px] border border-white/10 relative overflow-hidden flex flex-col shadow-2xl shadow-neon-purple/20"
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="w-full max-w-7xl h-[90vh] bg-black rounded-[32px] border border-white/10 relative overflow-hidden flex flex-col shadow-2xl shadow-neon-purple/20"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative w-full flex-1 overflow-hidden group bg-black/50">
+                            <div className="relative w-full flex-1 overflow-hidden group bg-black/50 flex items-center justify-center">
                                 <motion.div
-                                    className="relative w-full h-full"
+                                    className="relative w-full h-full flex items-center justify-center"
                                     drag="x"
                                     dragConstraints={{ left: 0, right: 0 }}
                                     dragElastic={0.2}
@@ -216,11 +220,35 @@ export default function GalleryPage() {
                                             src={selectedItem.image_url}
                                             alt={selectedItem.caption || 'Full View'}
                                             fill
+                                            priority
+                                            sizes="(max-width: 1536px) 100vw, 1536px"
                                             className="object-contain pointer-events-none"
                                             draggable={false}
                                         />
                                     )}
                                 </motion.div>
+
+                                {/* Preload Next/Prev Images for instant navigation */}
+                                <div className="hidden">
+                                    {items.length > 1 && (
+                                        <>
+                                            {items[(items.findIndex(item => item.id === selectedItem.id) + 1) % items.length]?.image_url && (
+                                                <Image 
+                                                    src={items[(items.findIndex(item => item.id === selectedItem.id) + 1) % items.length].image_url} 
+                                                    alt="preload-next" 
+                                                    fill sizes="(max-width: 1536px) 100vw, 1536px" priority 
+                                                />
+                                            )}
+                                            {items[(items.findIndex(item => item.id === selectedItem.id) - 1 + items.length) % items.length]?.image_url && (
+                                                <Image 
+                                                    src={items[(items.findIndex(item => item.id === selectedItem.id) - 1 + items.length) % items.length].image_url} 
+                                                    alt="preload-prev" 
+                                                    fill sizes="(max-width: 1536px) 100vw, 1536px" priority 
+                                                />
+                                            )}
+                                        </>
+                                    )}
+                                </div>
 
                                 {/* Navigation Buttons - Always visible on mobile, hover on desktop */}
                                 <button
