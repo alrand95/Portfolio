@@ -29,7 +29,8 @@ export const GalleryItemCard = React.memo(({ art, onSelect }: GalleryItemCardPro
                                     src={art.image_url}
                                     alt={art.caption || 'Gallery Image'}
                                     fill
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    sizes="(max-width: 768px) 400px, (max-width: 1200px) 33vw, 25vw"
+                                    quality={50}
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                             ) : (

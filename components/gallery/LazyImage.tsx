@@ -5,10 +5,11 @@ interface LazyImageProps {
     alt: string;
     fill?: boolean;
     sizes?: string;
+    quality?: number;
     className?: string;
 }
 
-export function LazyImage({ src, alt, fill, sizes, className }: LazyImageProps) {
+export function LazyImage({ src, alt, fill, sizes, quality = 60, className }: LazyImageProps) {
     return (
         <div className="w-full h-full relative">
             {/* Placeholder Background */}
@@ -18,6 +19,7 @@ export function LazyImage({ src, alt, fill, sizes, className }: LazyImageProps) 
                 alt={alt}
                 fill={fill}
                 sizes={sizes}
+                quality={quality}
                 className={className}
                 loading="lazy"
             />

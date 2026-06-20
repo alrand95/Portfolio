@@ -200,7 +200,8 @@ export function GalleryPageClient({ initialItems }: GalleryPageClientProps) {
                                             alt={selectedItem.caption || 'Full View'}
                                             fill
                                             priority
-                                            sizes="(max-width: 1536px) 100vw, 1536px"
+                                            quality={100}
+                                            sizes="100vw"
                                             className="object-contain pointer-events-none"
                                             draggable={false}
                                         />
